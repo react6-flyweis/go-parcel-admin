@@ -1,9 +1,16 @@
-import DashboardLayout from "@/components/layouts/DashboardLayout";
+import { Suspense } from "react";
+import { createBrowserRouter, RouterProvider } from "react-router";
+import { Routes } from "@/routes/index.route";
+import { Loading } from "@/components/layouts/loading";
 
-export default function App() {
+const router = createBrowserRouter(Routes);
+
+export function App() {
   return (
-    <DashboardLayout>
-      <div>Welcome to the Dashboard!</div>
-    </DashboardLayout>
+    <Suspense fallback={<Loading />}>
+      <RouterProvider router={router} />
+    </Suspense>
   );
 }
+
+export default App;
