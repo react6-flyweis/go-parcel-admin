@@ -1,13 +1,9 @@
-import React from "react";
 import Sidebar from "./Sidebar";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import Header from "./Header";
+import { Outlet } from "react-router";
 
-export default function DashboardLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function DashboardLayout() {
   return (
     <SidebarProvider>
       <div className="flex min-h-screen w-full">
@@ -15,7 +11,9 @@ export default function DashboardLayout({
 
         <SidebarInset>
           <Header />
-          <div className="p-5">{children}</div>
+          <div className="p-5">
+            <Outlet />
+          </div>
         </SidebarInset>
       </div>
     </SidebarProvider>
