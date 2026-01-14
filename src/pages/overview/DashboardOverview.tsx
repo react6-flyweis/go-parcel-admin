@@ -15,6 +15,18 @@ import {
   RefreshCw,
   FileDown,
 } from "lucide-react";
+import { RevenueOrdersChart } from "@/components/overview/RevenueOrdersChart";
+import { HourlyActiveOrdersChart } from "@/components/overview/HourlyActiveOrdersChart";
+import { RevenueByServiceChart } from "@/components/overview/RevenueByServiceChart";
+import { RegionalPerformance } from "@/components/overview/RegionalPerformance";
+import { AlertsPanel } from "@/components/overview/AlertsPanel";
+import { LiveMap } from "@/components/overview/LiveMap";
+import { TopDrivers } from "@/components/overview/TopDrivers";
+import { RecentActivity } from "@/components/overview/RecentActivity";
+import { RecentOrders } from "@/components/overview/RecentOrders";
+import { ServiceBreakdown } from "@/components/overview/ServiceBreakdown";
+import { WeeklySummary } from "@/components/overview/WeeklySummary";
+import { CustomerInsights } from "@/components/overview/CustomerInsights";
 
 export default function DashboardOverview() {
   return (
@@ -113,6 +125,52 @@ export default function DashboardOverview() {
           iconColor="bg-emerald-50 text-emerald-600"
         />
       </div>
+
+      {/* Charts */}
+      <div className="grid gap-4 md:grid-cols-2">
+        <RevenueOrdersChart />
+        <HourlyActiveOrdersChart />
+      </div>
+
+      {/* Additional Insights */}
+      <div className="grid gap-4 md:grid-cols-3">
+        <div className="">
+          <RevenueByServiceChart />
+        </div>
+        <div className="md:col-span-2">
+          <RegionalPerformance />
+        </div>
+      </div>
+
+      {/* Live Map + Top Drivers */}
+      <div className="grid gap-4 md:grid-cols-3">
+        <div className="md:col-span-2">
+          <LiveMap />
+        </div>
+        <div>
+          <TopDrivers />
+        </div>
+      </div>
+
+      {/* Recent Activity + Recent Orders */}
+      <div className="grid gap-4 md:grid-cols-3">
+        <div className="md:col-span-1">
+          <RecentActivity />
+        </div>
+        <div className="md:col-span-2">
+          <RecentOrders />
+        </div>
+      </div>
+
+      {/* Summary Cards */}
+      <div className="grid gap-4 md:grid-cols-3">
+        <ServiceBreakdown />
+        <WeeklySummary />
+        <CustomerInsights />
+      </div>
+
+      {/* Alerts / Action Cards */}
+      <AlertsPanel />
     </div>
   );
 }
