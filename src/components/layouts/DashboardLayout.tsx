@@ -11,7 +11,7 @@ export default function DashboardLayout() {
 
         <SidebarInset>
           <Header />
-          <div className="p-5">
+          <div className="p-5 bg-[#F9FAFB]">
             <Outlet />
           </div>
         </SidebarInset>
