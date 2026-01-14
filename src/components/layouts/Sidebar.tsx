@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { NavLink, useLocation } from "react-router";
 import {
   Sidebar as ShadSidebar,
   SidebarHeader,
@@ -15,6 +16,9 @@ import {
   Package,
   Zap,
   FileEdit,
+  MapPin,
+  Calendar,
+  AlertTriangle,
   Bell,
   Search,
   LayoutDashboardIcon,
@@ -41,7 +45,7 @@ const NAV_ITEMS: NavItem[] = [
   {
     title: "Dashboard",
     icon: LayoutDashboardIcon,
-    href: "/dashboard",
+    href: "/",
   },
   {
     title: "Send a Parcel",
@@ -49,12 +53,6 @@ const NAV_ITEMS: NavItem[] = [
     href: "/parcels",
     badge: "127",
     items: [
-      // all parcels
-      // active
-      // create order
-      // tracking
-      // scheduled
-      // failed
       {
         title: "All Parcels",
         icon: Package,
@@ -70,17 +68,46 @@ const NAV_ITEMS: NavItem[] = [
         icon: FileEdit,
         href: "/parcels/create",
       },
+      {
+        title: "Tracking",
+        icon: MapPin,
+        href: "/parcels/live",
+      },
+      {
+        title: "Scheduled",
+        icon: Calendar,
+        href: "/parcels/scheduled",
+      },
+      {
+        title: "Failed",
+        icon: AlertTriangle,
+        href: "/parcels/failed",
+      },
     ],
   },
   // more nav items...
 ];
 
 export default function Sidebar() {
+  const location = useLocation();
   const [openGroups, setOpenGroups] = useState<Record<string, boolean>>({});
 
-  // const toggleGroup = (key: string) => {
-  //   setOpenGroups((s) => ({ ...s, [key]: !s[key] }));
-  // };
+  // Check if any child item is active
+  const isAnyChildActive = (items?: NavItem[]) => {
+    if (!items) return false;
+    return items.some((item) => location.pathname === item.href);
+  };
+
+  // Initialize and update open groups based on active items
+  useEffect(() => {
+    const initialOpenGroups: Record<string, boolean> = {};
+    NAV_ITEMS.forEach((item) => {
+      if (item.items && isAnyChildActive(item.items)) {
+        initialOpenGroups[item.title] = true;
+      }
+    });
+    setOpenGroups((prev) => ({ ...prev, ...initialOpenGroups }));
+  }, [isAnyChildActive, location.pathname]);
 
   return (
     <ShadSidebar className="bg-sidebar">
@@ -134,8 +161,11 @@ export default function Sidebar() {
                       setOpenGroups((s) => ({ ...s, [item.title]: v }))
                     }
                   >
-                    <CollapsibleTrigger className="active:bg-white/20" asChild>
-                      <SidebarMenuButton className="h-10 w-full justify-between ">
+                    <CollapsibleTrigger
+                      className="data-[state=open]:bg-white/15"
+                      asChild
+                    >
+                      <SidebarMenuButton className="h-10 w-full justify-between text-white hover:text-white">
                         <div className="flex items-center gap-2">
                           <item.icon className="size-4" />
                           <span>{item.title}</span>
@@ -152,28 +182,31 @@ export default function Sidebar() {
                       <div className="mt-3  grid grid-cols-2 gap-3">
                         {item.items!.map((subItem, idx) => (
                           <SidebarMenuItem key={subItem.title}>
-                            <SidebarMenuButton className="p-0 h-20 w-full">
-                              <div className="relative w-full h-full rounded-lg flex flex-col items-center justify-center text-white select-none shadow-sm border border-white/5 overflow-hidden">
-                                <div
-                                  className={`flex flex-col items-center justify-center gap-1 w-full h-full px-2 ${
-                                    subItem.title === "All Parcels"
-                                      ? "bg-green-400 text-white"
-                                      : "bg-blue-900 text-white"
-                                  }`}
-                                >
-                                  <subItem.icon className="size-6" />
-                                  <span className="text-sm">
-                                    {subItem.title}
-                                  </span>
-                                </div>
+                            <NavLink to={subItem.href}>
+                              {({ isActive }) => (
+                                <SidebarMenuButton className="p-0 h-20 w-full">
+                                  <div className="relative w-full h-full rounded-lg flex flex-col items-center justify-center text-white select-none shadow-sm border border-white/5 overflow-hidden">
+                                    <div
+                                      className={`flex flex-col items-center justify-center gap-1 w-full h-full px-2 bg-black/15 ${
+                                        isActive &&
+                                        "bg-green-400 text-white ring-2 ring-white/30"
+                                      }`}
+                                    >
+                                      <subItem.icon className="size-6" />
+                                      <span className="text-sm">
+                                        {subItem.title}
+                                      </span>
+                                    </div>
 
-                                {item.badge && idx === 0 ? (
-                                  <span className="absolute top-2 right-2 bg-red-500 text-white text-xs rounded-full px-2">
-                                    {item.badge}
-                                  </span>
-                                ) : null}
-                              </div>
-                            </SidebarMenuButton>
+                                    {item.badge && idx === 0 ? (
+                                      <span className="absolute top-2 right-2 bg-red-500 text-white text-xs rounded-full px-2">
+                                        {item.badge}
+                                      </span>
+                                    ) : null}
+                                  </div>
+                                </SidebarMenuButton>
+                              )}
+                            </NavLink>
                           </SidebarMenuItem>
                         ))}
                       </div>
@@ -184,10 +217,18 @@ export default function Sidebar() {
 
               return (
                 <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton className="h-10">
-                    <item.icon />
-                    <span>{item.title}</span>
-                  </SidebarMenuButton>
+                  <NavLink to={item.href}>
+                    {({ isActive }) => (
+                      <SidebarMenuButton
+                        className={`h-10 text-white ${
+                          isActive ? "bg-primary" : ""
+                        }`}
+                      >
+                        <item.icon />
+                        <span>{item.title}</span>
+                      </SidebarMenuButton>
+                    )}
+                  </NavLink>
                 </SidebarMenuItem>
               );
             })}
