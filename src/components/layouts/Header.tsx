@@ -1,6 +1,7 @@
 import { Search, User, Bell, ChevronDown } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import UserMenu from "./UserMenu";
 
 export default function Header() {
   return (
@@ -38,17 +39,7 @@ export default function Header() {
             <span className="absolute right-1 top-0 inline-block h-2.5 w-2.5 rounded-full bg-red-500 ring-2 ring-white" />
           </div>
 
-          <div className="relative">
-            <button className="flex items-center gap-3">
-              <div className="h-10 w-10 rounded-full bg-green-500 text-white flex items-center justify-center font-semibold">
-                SA
-              </div>
-              <div className="hidden sm:flex flex-col">
-                <span className="text-sm font-medium">Admin User</span>
-                <span className="text-xs text-gray-500">Super Admin</span>
-              </div>
-            </button>
-          </div>
+          <UserMenu />
         </div>
       </div>
     </header>
