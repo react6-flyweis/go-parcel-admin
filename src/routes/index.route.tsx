@@ -4,6 +4,10 @@ import type { RouteObject } from "react-router";
 import DashboardLayout from "@/components/layouts/DashboardLayout";
 import { NotFound } from "@/pages/not-found";
 
+// Auth routes
+const Login = lazy(() => import("@/pages/auth/Login"));
+const ForgotPassword = lazy(() => import("@/pages/auth/ForgotPassword"));
+
 const DashboardOverview = lazy(
   () => import("@/pages/overview/DashboardOverview")
 );
@@ -22,7 +26,21 @@ const CreateParcelOrder = lazy(
   () => import("@/pages/parcels/CreateParcelOrder")
 );
 
+// Rides routes
+const AllRides = lazy(() => import("@/pages/ride/AllRides"));
+const ActiveTrips = lazy(() => import("@/pages/ride/ActiveTrips"));
+const RideHistory = lazy(() => import("@/pages/ride/History"));
+const RidePricing = lazy(() => import("@/pages/ride/Pricing"));
+
 export const Routes: RouteObject[] = [
+  {
+    path: "/login",
+    element: <Login />,
+  },
+  {
+    path: "/forgot-password",
+    element: <ForgotPassword />,
+  },
   {
     path: "/",
     element: <DashboardLayout />,
@@ -59,6 +77,31 @@ export const Routes: RouteObject[] = [
             element: <CreateParcelOrder />,
           },
           // Additional parcel routes can be added here
+        ],
+      },
+
+      // Rides
+      {
+        path: "rides",
+        children: [
+          {
+            path: "all",
+            element: <AllRides />,
+          },
+          {
+            path: "active",
+            element: <ActiveTrips />,
+          },
+          {
+            path: "history",
+            element: <RideHistory />,
+          },
+          {
+            path: "pricing",
+            element: <RidePricing />,
+          },
+
+          // Additional ride routes can be added here
         ],
       },
 
