@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Search, Filter, Download } from "lucide-react";
+import { Search, Filter, Download, CarIcon } from "lucide-react";
 import CreateParcelDialog from "@/components/parcels/CreateParcelDialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -100,9 +100,13 @@ export default function AllParcels() {
           </p>
         </div>
         {/* Create Parcel Order dialog */}
-        <div className="flex items-center">
-          <CreateParcelDialog />
-        </div>
+
+        <CreateParcelDialog>
+          <Button>
+            <CarIcon />
+            Create Parcel Order
+          </Button>
+        </CreateParcelDialog>
       </div>
 
       {/* Stat Cards */}

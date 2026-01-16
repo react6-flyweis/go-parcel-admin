@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, type PropsWithChildren } from "react";
 import {
   Dialog,
   DialogTrigger,
@@ -18,9 +18,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Package, User, MapPin } from "lucide-react";
+import { Package, User, MapPin, CarIcon } from "lucide-react";
 
-export default function CreateParcelDialog() {
+export default function CreateParcelDialog({ children }: PropsWithChildren) {
   const [open, setOpen] = useState(false);
 
   const [senderName, setSenderName] = useState("");
@@ -63,11 +63,15 @@ export default function CreateParcelDialog() {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button className="bg-green-500 hover:bg-green-600">
-          Create Parcel Order
-        </Button>
+        {children ? (
+          children
+        ) : (
+          <Button>
+            <CarIcon />
+            Create Parcel Order
+          </Button>
+        )}
       </DialogTrigger>
-
       <DialogContent className="sm:max-w-3xl max-h-[90vh] overflow-y-auto">
         <DialogHeader>
           <div className="flex items-start gap-3">
