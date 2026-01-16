@@ -17,6 +17,9 @@ import {
   Zap,
   FileEdit,
   MapPin,
+  Truck,
+  History,
+  DollarSign,
   Calendar,
   AlertTriangle,
   Bell,
@@ -24,6 +27,7 @@ import {
   LayoutDashboardIcon,
   ChevronDown,
   type LucideIcon,
+  Activity,
 } from "lucide-react";
 import logo from "@/assets/go-parcel-logo.svg";
 import { Button } from "../ui/button";
@@ -32,6 +36,7 @@ import {
   CollapsibleTrigger,
   CollapsibleContent,
 } from "@/components/ui/collapsible";
+import { Badge } from "../ui/badge";
 
 interface NavItem {
   title: string;
@@ -61,6 +66,7 @@ const NAV_ITEMS: NavItem[] = [
       {
         title: "Active",
         icon: Zap,
+        badge: "127",
         href: "/parcels/active",
       },
       {
@@ -85,6 +91,40 @@ const NAV_ITEMS: NavItem[] = [
       },
     ],
   },
+
+  {
+    title: "Rides",
+    icon: Truck,
+    href: "/rides",
+    badge: "84",
+    items: [
+      {
+        title: "All Rides",
+        icon: Truck,
+        href: "/rides/all",
+      },
+      {
+        title: "Active Trips",
+        icon: Activity,
+        badge: "84",
+        href: "/rides/active",
+      },
+      {
+        title: "History",
+        icon: History,
+        href: "/rides/history",
+      },
+      {
+        title: "Pricing",
+        icon: DollarSign,
+        href: "/rides/pricing",
+      },
+      // add more ride-related items here if needed
+    ],
+  },
+
+  // Rides
+
   // more nav items...
 ];
 
@@ -170,17 +210,22 @@ export default function Sidebar() {
                           <item.icon className="size-4" />
                           <span>{item.title}</span>
                         </div>
-                        <ChevronDown
-                          className={`size-4 transition-transform ${
-                            open ? "rotate-180" : ""
-                          }`}
-                        />
+                        <div className="flex items-center gap-2">
+                          {item.badge ? (
+                            <Badge variant="destructive">{item.badge}</Badge>
+                          ) : null}
+                          <ChevronDown
+                            className={`size-4 transition-transform ${
+                              open ? "rotate-180" : ""
+                            }`}
+                          />
+                        </div>
                       </SidebarMenuButton>
                     </CollapsibleTrigger>
 
                     <CollapsibleContent>
                       <div className="mt-3  grid grid-cols-2 gap-3">
-                        {item.items!.map((subItem, idx) => (
+                        {item.items!.map((subItem) => (
                           <SidebarMenuItem key={subItem.title}>
                             <NavLink to={subItem.href}>
                               {({ isActive }) => (
@@ -198,10 +243,13 @@ export default function Sidebar() {
                                       </span>
                                     </div>
 
-                                    {item.badge && idx === 0 ? (
-                                      <span className="absolute top-2 right-2 bg-red-500 text-white text-xs rounded-full px-2">
-                                        {item.badge}
-                                      </span>
+                                    {subItem.badge ? (
+                                      <Badge
+                                        variant="destructive"
+                                        className="absolute top-2 right-2 py-0.5"
+                                      >
+                                        {subItem.badge}
+                                      </Badge>
                                     ) : null}
                                   </div>
                                 </SidebarMenuButton>
