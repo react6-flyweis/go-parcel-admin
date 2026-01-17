@@ -25,6 +25,11 @@ import {
   Bell,
   Search,
   LayoutDashboardIcon,
+  Stethoscope,
+  Ambulance,
+  FileText,
+  Move,
+  Bus,
   ChevronDown,
   type LucideIcon,
   Activity,
@@ -120,6 +125,34 @@ const NAV_ITEMS: NavItem[] = [
         href: "/rides/pricing",
       },
       // add more ride-related items here if needed
+    ],
+  },
+
+  {
+    title: "Specialized Services",
+    icon: Stethoscope,
+    href: "/services",
+    items: [
+      {
+        title: "NEMT",
+        icon: Ambulance,
+        href: "/services/nemt",
+      },
+      {
+        title: "Notary",
+        icon: FileText,
+        href: "/services/notary",
+      },
+      {
+        title: "Movers",
+        icon: Move,
+        href: "/services/movers",
+      },
+      {
+        title: "Shuttle",
+        icon: Bus,
+        href: "/services/shuttle",
+      },
     ],
   },
 
