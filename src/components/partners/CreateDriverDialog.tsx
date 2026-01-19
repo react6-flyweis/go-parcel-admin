@@ -315,7 +315,7 @@ export default function CreateDriverDialog({ children }: PropsWithChildren) {
                   <FormField
                     control={form.control}
                     name="driversLicense"
-                    render={({ field }) => (
+                    render={() => (
                       <FormItem>
                         <FormControl>
                           <div className="p-3 bg-white rounded-md border">
@@ -329,7 +329,7 @@ export default function CreateDriverDialog({ children }: PropsWithChildren) {
                   <FormField
                     control={form.control}
                     name="vehicleRegistration"
-                    render={({ field }) => (
+                    render={() => (
                       <FormItem>
                         <FormControl>
                           <div className="p-3 bg-white rounded-md border">
@@ -343,7 +343,7 @@ export default function CreateDriverDialog({ children }: PropsWithChildren) {
                   <FormField
                     control={form.control}
                     name="insuranceDocuments"
-                    render={({ field }) => (
+                    render={() => (
                       <FormItem>
                         <FormControl>
                           <div className="p-3 bg-white rounded-md border">
@@ -357,7 +357,7 @@ export default function CreateDriverDialog({ children }: PropsWithChildren) {
                   <FormField
                     control={form.control}
                     name="backgroundCheck"
-                    render={({ field }) => (
+                    render={() => (
                       <FormItem>
                         <FormControl>
                           <div className="p-3 bg-white rounded-md border">

@@ -226,7 +226,7 @@ export default function CreatePartnerDialog({ children }: PropsWithChildren) {
                   <FormField
                     control={form.control}
                     name="businessLicense"
-                    render={({ field }) => (
+                    render={() => (
                       <FormItem>
                         <FormControl>
                           <div className="p-3 bg-white rounded-md border">
@@ -240,7 +240,7 @@ export default function CreatePartnerDialog({ children }: PropsWithChildren) {
                   <FormField
                     control={form.control}
                     name="insuranceCertificate"
-                    render={({ field }) => (
+                    render={() => (
                       <FormItem>
                         <FormControl>
                           <div className="p-3 bg-white rounded-md border">
@@ -254,7 +254,7 @@ export default function CreatePartnerDialog({ children }: PropsWithChildren) {
                   <FormField
                     control={form.control}
                     name="taxId"
-                    render={({ field }) => (
+                    render={() => (
                       <FormItem>
                         <FormControl>
                           <div className="p-3 bg-white rounded-md border">
