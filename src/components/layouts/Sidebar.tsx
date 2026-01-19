@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { NavLink, useLocation } from "react-router";
 import {
   Sidebar as ShadSidebar,
@@ -12,28 +12,7 @@ import {
   SidebarInput,
   //   SidebarMenuBadge,
 } from "@/components/ui/sidebar";
-import {
-  Package,
-  Zap,
-  FileEdit,
-  MapPin,
-  Truck,
-  History,
-  DollarSign,
-  Calendar,
-  AlertTriangle,
-  Bell,
-  Search,
-  LayoutDashboardIcon,
-  Stethoscope,
-  Ambulance,
-  FileText,
-  Move,
-  Bus,
-  ChevronDown,
-  type LucideIcon,
-  Activity,
-} from "lucide-react";
+
 import logo from "@/assets/go-parcel-logo.svg";
 import { Button } from "../ui/button";
 import {
@@ -42,124 +21,8 @@ import {
   CollapsibleContent,
 } from "@/components/ui/collapsible";
 import { Badge } from "../ui/badge";
-
-interface NavItem {
-  title: string;
-  icon: LucideIcon;
-  href: string;
-  badge?: string;
-  items?: NavItem[];
-}
-
-const NAV_ITEMS: NavItem[] = [
-  {
-    title: "Dashboard",
-    icon: LayoutDashboardIcon,
-    href: "/",
-  },
-  {
-    title: "Send a Parcel",
-    icon: Package,
-    href: "/parcels",
-    badge: "127",
-    items: [
-      {
-        title: "All Parcels",
-        icon: Package,
-        href: "/parcels/all",
-      },
-      {
-        title: "Active",
-        icon: Zap,
-        badge: "127",
-        href: "/parcels/active",
-      },
-      {
-        title: "Create Order",
-        icon: FileEdit,
-        href: "/parcels/create",
-      },
-      {
-        title: "Tracking",
-        icon: MapPin,
-        href: "/parcels/live",
-      },
-      {
-        title: "Scheduled",
-        icon: Calendar,
-        href: "/parcels/scheduled",
-      },
-      {
-        title: "Failed",
-        icon: AlertTriangle,
-        href: "/parcels/failed",
-      },
-    ],
-  },
-
-  {
-    title: "Rides",
-    icon: Truck,
-    href: "/rides",
-    badge: "84",
-    items: [
-      {
-        title: "All Rides",
-        icon: Truck,
-        href: "/rides/all",
-      },
-      {
-        title: "Active Trips",
-        icon: Activity,
-        badge: "84",
-        href: "/rides/active",
-      },
-      {
-        title: "History",
-        icon: History,
-        href: "/rides/history",
-      },
-      {
-        title: "Pricing",
-        icon: DollarSign,
-        href: "/rides/pricing",
-      },
-      // add more ride-related items here if needed
-    ],
-  },
-
-  {
-    title: "Specialized Services",
-    icon: Stethoscope,
-    href: "/services",
-    items: [
-      {
-        title: "NEMT",
-        icon: Ambulance,
-        href: "/services/nemt",
-      },
-      {
-        title: "Notary",
-        icon: FileText,
-        href: "/services/notary",
-      },
-      {
-        title: "Movers",
-        icon: Move,
-        href: "/services/movers",
-      },
-      {
-        title: "Shuttle",
-        icon: Bus,
-        href: "/services/shuttle",
-      },
-    ],
-  },
-
-  // Rides
-
-  // more nav items...
-];
+import { NAV_ITEMS, type NavItem } from "@/constants/navigation";
+import { Bell, ChevronDown, Search } from "lucide-react";
 
 export default function Sidebar() {
   const location = useLocation();
@@ -170,17 +33,6 @@ export default function Sidebar() {
     if (!items) return false;
     return items.some((item) => location.pathname === item.href);
   };
-
-  // Initialize and update open groups based on active items
-  useEffect(() => {
-    const initialOpenGroups: Record<string, boolean> = {};
-    NAV_ITEMS.forEach((item) => {
-      if (item.items && isAnyChildActive(item.items)) {
-        initialOpenGroups[item.title] = true;
-      }
-    });
-    setOpenGroups((prev) => ({ ...prev, ...initialOpenGroups }));
-  }, [isAnyChildActive, location.pathname]);
 
   return (
     <ShadSidebar className="bg-sidebar">
@@ -219,13 +71,14 @@ export default function Sidebar() {
         </div>
       </SidebarHeader>
 
-      <SidebarContent>
+      <SidebarContent className="thin-scrollbar overflow-y-auto">
         <SidebarGroup>
           <SidebarMenu>
             {NAV_ITEMS.map((item) => {
               const isCollapsible = item.items && item.items.length > 0;
               if (isCollapsible) {
-                const open = !!openGroups[item.title];
+                const hasActiveChild = isAnyChildActive(item.items);
+                const open = openGroups[item.title] ?? hasActiveChild;
                 return (
                   <Collapsible
                     key={item.title}
