@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import FilterPanel from "@/components/services/FilterPanel";
+import FilterPanel from "@/components/FilterPanel";
 
 import {
   Calendar,
@@ -12,8 +12,9 @@ import {
   TruckIcon,
 } from "lucide-react";
 import CreateNemtBookingDialog from "@/components/services/CreateNemtBookingDialog";
+import PageHeader from "@/components/PageHeader";
 import WeeklyTripsChart from "@/components/charts/WeeklyTripsChart";
-import StatCard2 from "@/components/services/StatCard2";
+import StatCard2 from "@/components/StatCard2";
 import NEMTBookingsTable from "@/components/services/NEMTBookingsTable";
 
 const statCards = [
@@ -54,25 +55,19 @@ export default function Nemt() {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex items-center justify-between">
-        <div>
-          <div className="flex gap-2">
-            <div className="rounded-lg bg-red-500 p-2 shadow-lg text-white">
-              <TruckIcon />
-            </div>
-            <h1 className="text-3xl font-bold tracking-tight">NEMT Services</h1>
-          </div>
-          <p className="text-muted-foreground">
-            Non-Emergency Medical Transportation Management
-          </p>
-        </div>
+      <PageHeader
+        title="NEMT Services"
+        subtitle="Non-Emergency Medical Transportation Management"
+        Icon={<TruckIcon />}
+        iconColor="bg-red-500"
+      >
         <CreateNemtBookingDialog>
           <Button className="bg-green-500 hover:bg-green-600">
-            <PlusIcon className="" />
+            <PlusIcon />
             New Booking
           </Button>
         </CreateNemtBookingDialog>
-      </div>
+      </PageHeader>
 
       {/* Stats Cards */}
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">

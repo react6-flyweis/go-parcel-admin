@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import FilterPanel from "@/components/services/FilterPanel";
+import FilterPanel from "@/components/FilterPanel";
+import PageHeader from "@/components/PageHeader";
 import {
   Calendar,
   TrendingUp,
@@ -11,7 +12,7 @@ import {
   Shield,
 } from "lucide-react";
 import CreateNotaryAppointmentDialog from "@/components/services/CreateNotaryAppointmentDialog";
-import StatCard2 from "@/components/services/StatCard2";
+import StatCard2 from "@/components/StatCard2";
 import WeeklyAppointmentVolumeChart from "@/components/charts/WeeklyAppointmentVolumeChart";
 import NotaryAppointmentsTable from "@/components/services/NotaryAppointmentsTable";
 
@@ -52,28 +53,19 @@ const statCards = [
 export default function Notary() {
   return (
     <div className="space-y-6">
-      {/* Header */}
-      <div className="flex items-center justify-between">
-        <div>
-          <div className="flex gap-2">
-            <div className="rounded-lg bg-purple-600 p-2 shadow-lg text-white">
-              <TruckIcon />
-            </div>
-            <h1 className="text-3xl font-bold tracking-tight">
-              Mobile Notary Services
-            </h1>
-          </div>
-          <p className="text-muted-foreground">
-            Professional notary services at your location
-          </p>
-        </div>
+      <PageHeader
+        title="Mobile Notary Services"
+        subtitle="Professional notary services at your location"
+        Icon={<TruckIcon />}
+        iconColor="bg-purple-600"
+      >
         <CreateNotaryAppointmentDialog>
           <Button className="bg-green-500 hover:bg-green-600">
-            <PlusIcon className="" />
+            <PlusIcon />
             New Appointment
           </Button>
         </CreateNotaryAppointmentDialog>
-      </div>
+      </PageHeader>
 
       {/* Stats Cards */}
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">

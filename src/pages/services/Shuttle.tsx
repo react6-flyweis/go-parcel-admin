@@ -1,7 +1,8 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import FilterPanel from "@/components/services/FilterPanel";
+import FilterPanel from "@/components/FilterPanel";
 import CreateShuttleRouteDialog from "@/components/services/CreateShuttleRouteDialog";
+import PageHeader from "@/components/PageHeader";
 
 import {
   Calendar,
@@ -11,7 +12,7 @@ import {
   Bus,
   Users,
 } from "lucide-react";
-import StatCard2 from "@/components/services/StatCard2";
+import StatCard2 from "@/components/StatCard2";
 import WeeklyTripsChartShuttle from "@/components/charts/WeeklyTripsChartShuttle";
 import ShuttleRoutesTable from "@/components/services/ShuttleRoutesTable";
 
@@ -20,11 +21,7 @@ const statCards = [
     title: "Active Routes",
     value: "18",
     subtitle: "6 organizations",
-    Icon: (
-      <div className="rounded-lg bg-white/20 p-2 text-white">
-        <Bus className="h-6 w-6" />
-      </div>
-    ),
+    Icon: <Bus className="size-8" />,
     className: "text-white bg-gradient-to-r from-teal-400 to-cyan-500",
   },
   {
@@ -55,28 +52,19 @@ const statCards = [
 export default function Shuttle() {
   return (
     <div className="space-y-6">
-      {/* Header */}
-      <div className="flex items-center justify-between">
-        <div>
-          <div className="flex gap-2 items-center">
-            <div className="rounded-lg bg-teal-500 p-2 shadow-lg text-white">
-              <Bus className="h-5 w-5" />
-            </div>
-            <h1 className="text-3xl font-bold tracking-tight">
-              Shuttle Services
-            </h1>
-          </div>
-          <p className="text-muted-foreground">
-            Corporate and institutional shuttle management
-          </p>
-        </div>
+      <PageHeader
+        title="Shuttle Services"
+        subtitle="Corporate and institutional shuttle management"
+        Icon={<Bus className="size-6" />}
+        iconColor="bg-teal-500"
+      >
         <CreateShuttleRouteDialog>
           <Button className="bg-green-500 hover:bg-green-600">
             <PlusIcon />
             New Shuttle Route
           </Button>
         </CreateShuttleRouteDialog>
-      </div>
+      </PageHeader>
 
       {/* Stats Cards */}
       <div className="grid gap-4 md:grid-cols-4">

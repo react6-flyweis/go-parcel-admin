@@ -1,7 +1,8 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import FilterPanel from "@/components/services/FilterPanel";
+import FilterPanel from "@/components/FilterPanel";
 import CreateMovingJobDialog from "@/components/services/CreateMovingJobDialog";
+import PageHeader from "@/components/PageHeader";
 
 import {
   Calendar,
@@ -13,7 +14,7 @@ import {
   Move,
 } from "lucide-react";
 import WeeklyMovingJobsChart from "@/components/charts/WeeklyMovingJobsChart";
-import StatCard2 from "@/components/services/StatCard2";
+import StatCard2 from "@/components/StatCard2";
 import MovingJobsTable from "@/components/services/MovingJobsTable";
 
 const statCards = [
@@ -53,28 +54,19 @@ const statCards = [
 export default function Moving() {
   return (
     <div className="space-y-6">
-      {/* Header */}
-      <div className="flex items-center justify-between">
-        <div>
-          <div className="flex gap-2">
-            <div className="rounded-lg bg-orange-500 p-2 shadow-lg text-white">
-              <Move />
-            </div>
-            <h1 className="text-3xl font-bold tracking-tight">
-              Moving Services
-            </h1>
-          </div>
-          <p className="text-muted-foreground">
-            Professional residential and commercial moving
-          </p>
-        </div>
+      <PageHeader
+        title="Moving Services"
+        subtitle="Professional residential and commercial moving"
+        Icon={<Move />}
+        iconColor="bg-orange-500"
+      >
         <CreateMovingJobDialog>
           <Button className="bg-green-500 hover:bg-green-600">
-            <PlusIcon className="" />
+            <PlusIcon />
             New Moving Job
           </Button>
         </CreateMovingJobDialog>
-      </div>
+      </PageHeader>
 
       {/* Stats Cards */}
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
