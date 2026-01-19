@@ -12,7 +12,7 @@ export default function FilterPanel() {
             <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
             <Input
               placeholder="Search by patient name, booking ID..."
-              className="pl-9 border-o ring-0 focus:ring-0 focus:border-o"
+              className="pl-9 border-0 shadow-none"
             />
           </div>
           <Button variant="outline" className="gap-2 bg-gray-100">
