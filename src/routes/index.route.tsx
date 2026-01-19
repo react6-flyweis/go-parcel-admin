@@ -38,6 +38,17 @@ const Notary = lazy(() => import("@/pages/services/Notary"));
 const Moving = lazy(() => import("@/pages/services/Moving"));
 const Shuttle = lazy(() => import("@/pages/services/Shuttle"));
 
+// partners screens
+const Partners = lazy(() => import("@/pages/partners/Partners"));
+const Drivers = lazy(() => import("@/pages/partners/Drivers"));
+const Onboarding = lazy(() => import("@/pages/partners/Onboarding"));
+const Performance = lazy(() => import("@/pages/partners/Performance"));
+
+// fleet management screens
+const Vehivcles = lazy(() => import("@/pages/fleet/Vehicles"));
+const Tracking = lazy(() => import("@/pages/fleet/Tracking"));
+const Maintenance = lazy(() => import("@/pages/fleet/Maintenance"));
+
 export const Routes: RouteObject[] = [
   {
     path: "/login",
@@ -55,6 +66,8 @@ export const Routes: RouteObject[] = [
         index: true,
         element: <DashboardOverview />,
       },
+
+      // send a parcel routes
       {
         path: "parcels",
         children: [
@@ -86,7 +99,7 @@ export const Routes: RouteObject[] = [
         ],
       },
 
-      // Rides
+      // Rides routes
       {
         path: "rides",
         children: [
@@ -111,7 +124,7 @@ export const Routes: RouteObject[] = [
         ],
       },
 
-      // Services
+      // Services routes
       {
         path: "services",
         children: [
@@ -131,11 +144,50 @@ export const Routes: RouteObject[] = [
             path: "shuttle",
             element: <Shuttle />,
           },
-          // Additional service routes can be added here
         ],
       },
 
-      // Additional routes can be added here
+      // Partners routes
+      {
+        path: "partners",
+        children: [
+          {
+            path: "all",
+            element: <Partners />,
+          },
+          {
+            path: "onboarding",
+            element: <Onboarding />,
+          },
+          {
+            path: "drivers",
+            element: <Drivers />,
+          },
+          {
+            path: "performance",
+            element: <Performance />,
+          },
+        ],
+      },
+
+      // Fleet routes
+      {
+        path: "fleet",
+        children: [
+          {
+            path: "vehicles",
+            element: <Vehivcles />,
+          },
+          {
+            path: "tracking",
+            element: <Tracking />,
+          },
+          {
+            path: "maintenance",
+            element: <Maintenance />,
+          },
+        ],
+      },
 
       // 404
       { path: "*", element: <NotFound /> },
