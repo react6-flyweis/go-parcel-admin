@@ -21,6 +21,10 @@ import {
   Building2,
   UserCheck,
   Wrench,
+  Receipt,
+  Wallet,
+  RotateCcw,
+  ChartBar,
 } from "lucide-react";
 
 export interface NavItem {
@@ -184,6 +188,36 @@ export const NAV_ITEMS: NavItem[] = [
         title: "Tracking",
         icon: MapPin,
         href: "/fleet/tracking",
+      },
+    ],
+  },
+
+  // payments and Finance
+
+  {
+    title: "Payments & Finance",
+    icon: DollarSign,
+    href: "/payments",
+    items: [
+      {
+        title: "Transactions",
+        icon: Receipt,
+        href: "/payments/transactions",
+      },
+      {
+        title: "Payouts",
+        icon: Wallet,
+        href: "/payments/payouts",
+      },
+      {
+        title: "Refunds",
+        icon: RotateCcw,
+        href: "/payments/refunds",
+      },
+      {
+        title: "Reports",
+        icon: ChartBar,
+        href: "/payments/reports",
       },
     ],
   },
