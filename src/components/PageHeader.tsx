@@ -19,9 +19,11 @@ export default function PageHeader({
     <div className="flex items-center justify-between">
       <div>
         <div className="flex gap-2">
-          <div className={`rounded-lg p-2 shadow-lg text-white ${iconColor}`}>
-            {Icon}
-          </div>
+          {Icon && (
+            <div className={`rounded-lg p-2 shadow-lg text-white ${iconColor}`}>
+              {Icon}
+            </div>
+          )}
           <h1 className="text-3xl  tracking-tight">{title}</h1>
         </div>
         {subtitle && <p className="text-muted-foreground">{subtitle}</p>}
