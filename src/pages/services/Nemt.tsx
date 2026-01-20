@@ -1,6 +1,5 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import FilterPanel from "@/components/FilterPanel";
 
 import {
   Calendar,
@@ -94,11 +93,7 @@ export default function Nemt() {
         </CardContent>
       </Card>
 
-      {/* Search and Filter Section */}
-      <FilterPanel />
-
-      {/* NEMT Bookings Table */}
-
+      {/* NEMT Bookings DataTable */}
       <NEMTBookingsTable />
     </div>
   );
