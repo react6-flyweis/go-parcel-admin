@@ -49,6 +49,12 @@ const Vehivcles = lazy(() => import("@/pages/fleet/Vehicles"));
 const Tracking = lazy(() => import("@/pages/fleet/Tracking"));
 const Maintenance = lazy(() => import("@/pages/fleet/Maintenance"));
 
+// transactions screen
+const AllTransactions = lazy(() => import("@/pages/payments/Transactions"));
+const AllPayouts = lazy(() => import("@/pages/payments/Payouts"));
+const AllRefunds = lazy(() => import("@/pages/payments/Refunds"));
+const AllReports = lazy(() => import("@/pages/payments/Reports"));
+
 export const Routes: RouteObject[] = [
   {
     path: "/login",
@@ -176,7 +182,7 @@ export const Routes: RouteObject[] = [
         children: [
           {
             path: "vehicles",
-            element: <Vehivcles />,
+            element: <Vehicles />,
           },
           {
             path: "tracking",
@@ -185,6 +191,28 @@ export const Routes: RouteObject[] = [
           {
             path: "maintenance",
             element: <Maintenance />,
+          },
+        ],
+      },
+      // payments and finance routes
+      {
+        path: "payments",
+        children: [
+          {
+            path: "transactions",
+            element: <AllTransactions />,
+          },
+          {
+            path: "payouts",
+            element: <AllPayouts />,
+          },
+          {
+            path: "refunds",
+            element: <AllRefunds />,
+          },
+          {
+            path: "reports",
+            element: <AllReports />,
           },
         ],
       },
