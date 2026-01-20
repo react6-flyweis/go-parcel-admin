@@ -3,7 +3,8 @@ import type { ColumnDef } from "@tanstack/react-table";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import FilterPanel from "./FilterPanel";
 import { exportTableToCSV } from "@/lib/exportTable";
-import DataTable from "./DataTable";
+import DataTable, { type DataTableRef } from "./DataTable";
+import { useRef } from "react";
 
 type DataTableProps<TData, TValue> = {
   columns: ColumnDef<TData, TValue>[];
@@ -21,8 +22,14 @@ export default function DataTableWithSearch<TData, TValue>({
   title = "Data Table",
   searchPlaceholder = "Search...",
 }: DataTableProps<TData, TValue>) {
+  const tableRef = useRef<DataTableRef<TData>>(null);
+
   const handleExport = () => {
-    exportTableToCSV(table, title);
+    const tableInstance = tableRef.current?.getTable();
+    if (tableInstance) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      exportTableToCSV(tableInstance as any, title);
+    }
   };
 
   return (
@@ -39,6 +46,7 @@ export default function DataTableWithSearch<TData, TValue>({
         </CardHeader>
         <CardContent className="p-0">
           <DataTable
+            ref={tableRef}
             columns={columns}
             data={data}
             searchColumn={searchColumn}

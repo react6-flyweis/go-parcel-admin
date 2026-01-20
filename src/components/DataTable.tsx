@@ -26,8 +26,9 @@ import {
   type ColumnDef,
   type SortingState,
   type ColumnFiltersState,
+  type Table as TableType,
 } from "@tanstack/react-table";
-import { useState } from "react";
+import { forwardRef, useImperativeHandle, useState } from "react";
 
 type DataTableProps<TData, TValue> = {
   columns: ColumnDef<TData, TValue>[];
@@ -38,10 +39,20 @@ type DataTableProps<TData, TValue> = {
   onExport?: () => void;
 };
 
-export default function DataTable<TData, TValue>({
-  columns,
-  data,
-}: DataTableProps<TData, TValue>) {
+export type DataTableRef<TData> = {
+  resetFilters: () => void;
+  resetSorting: () => void;
+  resetColumnVisibility: () => void;
+  resetAll: () => void;
+  getTable: () => TableType<TData>;
+  setPageIndex: (index: number) => void;
+  setPageSize: (size: number) => void;
+};
+
+const DataTableInner = forwardRef(function DataTableInner<TData, TValue>(
+  { columns, data }: DataTableProps<TData, TValue>,
+  ref: React.Ref<DataTableRef<TData>>,
+) {
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
@@ -62,6 +73,20 @@ export default function DataTable<TData, TValue>({
       columnVisibility,
     },
   });
+
+  useImperativeHandle(ref, () => ({
+    resetFilters: () => setColumnFilters([]),
+    resetSorting: () => setSorting([]),
+    resetColumnVisibility: () => setColumnVisibility({}),
+    resetAll: () => {
+      setColumnFilters([]);
+      setSorting([]);
+      setColumnVisibility({});
+    },
+    getTable: () => table,
+    setPageIndex: (index: number) => table.setPageIndex(index),
+    setPageSize: (size: number) => table.setPageSize(size),
+  }));
 
   return (
     <div className="overflow-x-auto rounded-md border">
@@ -146,4 +171,18 @@ export default function DataTable<TData, TValue>({
       </div>
     </div>
   );
-}
+});
+
+const DataTable = forwardRef(function DataTable<TData, TValue>(
+  props: DataTableProps<TData, TValue>,
+  ref: React.Ref<DataTableRef<TData>>,
+) {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  return <DataTableInner {...(props as any)} ref={ref as any} />;
+}) as <TData, TValue>(
+  props: DataTableProps<TData, TValue> & {
+    ref?: React.Ref<DataTableRef<TData>>;
+  },
+) => React.ReactElement;
+
+export default DataTable;
