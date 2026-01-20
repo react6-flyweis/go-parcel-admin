@@ -1,22 +1,15 @@
-import { Search, User, Bell, ChevronDown } from "lucide-react";
-import { Input } from "@/components/ui/input";
+import { User, Bell, ChevronDown } from "lucide-react";
+
 import { Button } from "@/components/ui/button";
 import UserMenu from "./UserMenu";
+import HeaderSearch from "./HeaderSearch";
 
 export default function Header() {
   return (
     <header className="w-full bg-white py-4 px-6 shadow-sm">
       <div className="flex items-center justify-between gap-4">
         <div className="flex-1">
-          <div className="relative max-w-lg">
-            <div className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none">
-              <Search size={18} />
-            </div>
-            <Input
-              placeholder="Search orders, drivers, partners..."
-              className="w-full rounded-xl pl-10 pr-4 py-3"
-            />
-          </div>
+          <HeaderSearch />
         </div>
 
         <div className="flex items-center gap-4">
