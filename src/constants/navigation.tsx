@@ -1,6 +1,9 @@
 import {
   Package,
   Zap,
+  Headphones,
+  MessageSquare,
+  HelpCircle,
   FileEdit,
   MapPin,
   Truck,
@@ -221,6 +224,36 @@ export const NAV_ITEMS: NavItem[] = [
       },
     ],
   },
+
+  {
+    title: "Support & Disputes",
+    icon: Headphones,
+    href: "/support",
+    items: [
+      {
+        title: "Tickets",
+        icon: MessageSquare,
+        href: "/support/tickets",
+      },
+      {
+        title: "Live Chat",
+        icon: Activity,
+        href: "/support/live-chat",
+      },
+      {
+        title: "Disputes",
+        icon: AlertTriangle,
+        href: "/support/disputes",
+      },
+      {
+        title: "FAQ",
+        icon: HelpCircle,
+        href: "/support/faq",
+      },
+    ],
+  },
+
+  // support
 
   // more nav items...
 ];
