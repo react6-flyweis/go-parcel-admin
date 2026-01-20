@@ -45,7 +45,7 @@ const Onboarding = lazy(() => import("@/pages/partners/Onboarding"));
 const Performance = lazy(() => import("@/pages/partners/Performance"));
 
 // fleet management screens
-const Vehivcles = lazy(() => import("@/pages/fleet/Vehicles"));
+const Vehicles = lazy(() => import("@/pages/fleet/Vehicles"));
 const Tracking = lazy(() => import("@/pages/fleet/Tracking"));
 const Maintenance = lazy(() => import("@/pages/fleet/Maintenance"));
 
@@ -54,6 +54,14 @@ const AllTransactions = lazy(() => import("@/pages/payments/Transactions"));
 const AllPayouts = lazy(() => import("@/pages/payments/Payouts"));
 const AllRefunds = lazy(() => import("@/pages/payments/Refunds"));
 const AllReports = lazy(() => import("@/pages/payments/Reports"));
+
+// support screens
+const SupportTickets = lazy(() => import("@/pages/support/SupportTickets"));
+const DisputeManagement = lazy(
+  () => import("@/pages/support/DisputeManagement"),
+);
+const LiveChatSupport = lazy(() => import("@/pages/support/LiveChatSupport"));
+const FAQManagement = lazy(() => import("@/pages/support/FAQManagement"));
 
 export const Routes: RouteObject[] = [
   {
@@ -194,6 +202,7 @@ export const Routes: RouteObject[] = [
           },
         ],
       },
+
       // payments and finance routes
       {
         path: "payments",
@@ -213,6 +222,29 @@ export const Routes: RouteObject[] = [
           {
             path: "reports",
             element: <AllReports />,
+          },
+        ],
+      },
+
+      // support routes
+      {
+        path: "support",
+        children: [
+          {
+            path: "tickets",
+            element: <SupportTickets />,
+          },
+          {
+            path: "disputes",
+            element: <DisputeManagement />,
+          },
+          {
+            path: "live-chat",
+            element: <LiveChatSupport />,
+          },
+          {
+            path: "faq",
+            element: <FAQManagement />,
           },
         ],
       },
