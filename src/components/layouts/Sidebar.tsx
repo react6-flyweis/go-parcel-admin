@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { NavLink, useLocation } from "react-router";
 import {
   Sidebar as ShadSidebar,
@@ -22,11 +22,12 @@ import {
 } from "@/components/ui/collapsible";
 import { Badge } from "../ui/badge";
 import { NAV_ITEMS, type NavItem } from "@/constants/navigation";
-import { Bell, ChevronDown, Search } from "lucide-react";
+import { Bell, ChevronDown, Search, XIcon } from "lucide-react";
 
 export default function Sidebar() {
   const location = useLocation();
   const [openGroups, setOpenGroups] = useState<Record<string, boolean>>({});
+  const [searchQuery, setSearchQuery] = useState("");
 
   // Check if any child item is active
   const isAnyChildActive = (items?: NavItem[]) => {
@@ -64,8 +65,22 @@ export default function Sidebar() {
               <Search className="absolute text-white/40 size-5 left-2 top-1/2 -translate-y-1/2" />
               <SidebarInput
                 placeholder="Search"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
                 className="bg-white/10 border-0 pl-8 placeholder:text-white/50 h-10  text-white/50"
               />
+              {searchQuery && (
+                <Button
+                  className="absolute right-2 top-1/2 -translate-y-1/2 rounded-full hover:bg-white/10"
+                  variant="ghost"
+                  size="icon"
+                >
+                  <XIcon
+                    className=" text-white/40"
+                    onClick={() => setSearchQuery("")}
+                  />
+                </Button>
+              )}
             </div>
           </div>
         </div>
@@ -74,11 +89,31 @@ export default function Sidebar() {
       <SidebarContent className="thin-scrollbar overflow-y-auto">
         <SidebarGroup>
           <SidebarMenu>
-            {NAV_ITEMS.map((item) => {
+            {useMemo(() => {
+              const q = searchQuery.trim().toLowerCase();
+              if (!q) return NAV_ITEMS;
+
+              return NAV_ITEMS.map((item) => {
+                const parentMatches = item.title.toLowerCase().includes(q);
+                if (item.items && item.items.length > 0) {
+                  if (parentMatches) return item;
+                  const matchingChildren = item.items.filter((c) =>
+                    c.title.toLowerCase().includes(q),
+                  );
+                  if (matchingChildren.length)
+                    return { ...item, items: matchingChildren };
+                  return null;
+                }
+
+                return parentMatches ? item : null;
+              }).filter(Boolean) as NavItem[];
+            }, [searchQuery]).map((item) => {
               const isCollapsible = item.items && item.items.length > 0;
               if (isCollapsible) {
                 const hasActiveChild = isAnyChildActive(item.items);
-                const open = openGroups[item.title] ?? hasActiveChild;
+                const open =
+                  (openGroups[item.title] ?? hasActiveChild) ||
+                  searchQuery.trim().length > 0;
                 return (
                   <Collapsible
                     key={item.title}
