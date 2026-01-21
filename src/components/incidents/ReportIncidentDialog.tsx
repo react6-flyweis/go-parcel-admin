@@ -164,6 +164,7 @@ export default function ReportIncidentDialog({
                     <FormLabel>Description *</FormLabel>
                     <FormControl>
                       <Textarea
+                        className="min-h-[6ch]"
                         placeholder="Provide detailed description of the incident..."
                         rows={6}
                         {...field}
