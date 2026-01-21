@@ -1,4 +1,3 @@
-import React from "react";
 import DataTable from "@/components/DataTable";
 import type { ColumnDef } from "@tanstack/react-table";
 import { Card, CardContent } from "@/components/ui/card";
