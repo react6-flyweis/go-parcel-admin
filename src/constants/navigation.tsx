@@ -28,6 +28,8 @@ import {
   Wallet,
   RotateCcw,
   ChartBar,
+  Shield,
+  ShieldCheck,
 } from "lucide-react";
 
 export interface NavItem {
@@ -252,6 +254,31 @@ export const NAV_ITEMS: NavItem[] = [
       },
     ],
   },
+
+  // compliance and safety
+  {
+    title: "Compliance & Safety",
+    icon: Shield,
+    href: "/compliance",
+    items: [
+      {
+        title: "Verifications",
+        icon: ShieldCheck,
+        href: "/compliance/verifications",
+      },
+      {
+        title: "Incidents",
+        icon: AlertTriangle,
+        href: "/compliance/incidents",
+      },
+      {
+        title: "Audits",
+        icon: FileText,
+        href: "/compliance/audits",
+      },
+    ],
+  },
+
 
   // support
 
