@@ -23,6 +23,7 @@ import {
   Activity,
   Building2,
   UserCheck,
+  Key,
   Wrench,
   Receipt,
   Wallet,
@@ -30,6 +31,8 @@ import {
   ChartBar,
   Shield,
   ShieldCheck,
+  UserCog,
+  UserCircle,
 } from "lucide-react";
 
 export interface NavItem {
@@ -174,6 +177,7 @@ export const NAV_ITEMS: NavItem[] = [
     ],
   },
 
+  // fleet management
   {
     title: "Fleet Management",
     icon: Truck,
@@ -227,6 +231,7 @@ export const NAV_ITEMS: NavItem[] = [
     ],
   },
 
+  // support and disputes
   {
     title: "Support & Disputes",
     icon: Headphones,
@@ -279,6 +284,29 @@ export const NAV_ITEMS: NavItem[] = [
     ],
   },
 
+  // users and roles
+  {
+    title: "Users & Roles",
+    icon: Users,
+    href: "/users",
+    items: [
+      {
+        title: "Admins",
+        icon: UserCog,
+        href: "/users/admins",
+      },
+      {
+        title: "Customers",
+        icon: UserCircle,
+        href: "/users/customers",
+      },
+      {
+        title: "Permissions",
+        icon: Key,
+        href: "/users/permissions",
+      },
+    ],
+  },
 
   // support
 
