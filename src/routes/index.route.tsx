@@ -63,6 +63,12 @@ const DisputeManagement = lazy(
 const LiveChatSupport = lazy(() => import("@/pages/support/LiveChatSupport"));
 const FAQManagement = lazy(() => import("@/pages/support/FAQManagement"));
 
+// Compliance screens
+
+const Verifications = lazy(() => import("@/pages/compliance/Verifications"));
+const Incidents = lazy(() => import("@/pages/compliance/Incidents"));
+const Audits = lazy(() => import("@/pages/compliance/Audits"));
+
 export const Routes: RouteObject[] = [
   {
     path: "/login",
@@ -245,6 +251,25 @@ export const Routes: RouteObject[] = [
           {
             path: "faq",
             element: <FAQManagement />,
+          },
+        ],
+      },
+
+      // compliance routes
+      {
+        path: "compliance",
+        children: [
+          {
+            path: "incidents",
+            element: <Incidents />,
+          },
+          {
+            path: "verifications",
+            element: <Verifications />,
+          },
+          {
+            path: "audits",
+            element: <Audits />,
           },
         ],
       },
