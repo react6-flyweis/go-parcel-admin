@@ -69,6 +69,11 @@ const Verifications = lazy(() => import("@/pages/compliance/Verifications"));
 const Incidents = lazy(() => import("@/pages/compliance/Incidents"));
 const Audits = lazy(() => import("@/pages/compliance/Audits"));
 
+// user and roles screens
+const Admins = lazy(() => import("@/pages/users/Admins"));
+const Customers = lazy(() => import("@/pages/users/Customers"));
+const Permissions = lazy(() => import("@/pages/users/Permissions"));
+
 export const Routes: RouteObject[] = [
   {
     path: "/login",
@@ -270,6 +275,25 @@ export const Routes: RouteObject[] = [
           {
             path: "audits",
             element: <Audits />,
+          },
+        ],
+      },
+
+      // user and roles routes
+      {
+        path: "users",
+        children: [
+          {
+            path: "admins",
+            element: <Admins />,
+          },
+          {
+            path: "customers",
+            element: <Customers />,
+          },
+          {
+            path: "permissions",
+            element: <Permissions />,
           },
         ],
       },
