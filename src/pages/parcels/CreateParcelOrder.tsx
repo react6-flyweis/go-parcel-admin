@@ -71,7 +71,7 @@ function StepIndicator({ step, currentStep, label, icon }: StepIndicatorProps) {
           "w-12 h-12 rounded-full flex items-center justify-center font-semibold transition-colors",
           isActive && "bg-emerald-500 text-white",
           isCompleted && "bg-emerald-500 text-white",
-          !isActive && !isCompleted && "bg-gray-200 text-gray-500"
+          !isActive && !isCompleted && "bg-gray-200 text-gray-500",
         )}
       >
         {isCompleted ? <Check className="w-6 h-6" /> : icon}
@@ -252,7 +252,7 @@ export default function CreateParcelOrder() {
             <div
               className={cn(
                 "flex-1 h-1 mx-2",
-                currentStep > 1 ? "bg-emerald-500" : "bg-gray-200"
+                currentStep > 1 ? "bg-emerald-500" : "bg-gray-200",
               )}
             />
             <StepIndicator
@@ -264,7 +264,7 @@ export default function CreateParcelOrder() {
             <div
               className={cn(
                 "flex-1 h-1 mx-2",
-                currentStep > 2 ? "bg-emerald-500" : "bg-gray-200"
+                currentStep > 2 ? "bg-emerald-500" : "bg-gray-200",
               )}
             />
             <StepIndicator
@@ -276,7 +276,7 @@ export default function CreateParcelOrder() {
             <div
               className={cn(
                 "flex-1 h-1 mx-2",
-                currentStep > 3 ? "bg-emerald-500" : "bg-gray-200"
+                currentStep > 3 ? "bg-emerald-500" : "bg-gray-200",
               )}
             />
             <StepIndicator
@@ -527,7 +527,7 @@ export default function CreateParcelOrder() {
                           defaultValue={field.value}
                         >
                           <FormControl>
-                            <SelectTrigger>
+                            <SelectTrigger className="w-full">
                               <SelectValue placeholder="Select parcel type" />
                             </SelectTrigger>
                           </FormControl>
@@ -559,7 +559,7 @@ export default function CreateParcelOrder() {
                           defaultValue={field.value}
                         >
                           <FormControl>
-                            <SelectTrigger>
+                            <SelectTrigger className="w-full">
                               <SelectValue placeholder="Select package size" />
                             </SelectTrigger>
                           </FormControl>
@@ -663,7 +663,7 @@ export default function CreateParcelOrder() {
                                 "relative p-4 border-2 rounded-lg cursor-pointer transition-all hover:border-emerald-500",
                                 field.value === "standard"
                                   ? "border-emerald-500 bg-emerald-50"
-                                  : "border-gray-200"
+                                  : "border-gray-200",
                               )}
                             >
                               <div className="flex items-start justify-between mb-2">
@@ -691,7 +691,7 @@ export default function CreateParcelOrder() {
                                 "relative p-4 border-2 rounded-lg cursor-pointer transition-all hover:border-emerald-500",
                                 field.value === "express"
                                   ? "border-emerald-500 bg-emerald-50"
-                                  : "border-gray-200"
+                                  : "border-gray-200",
                               )}
                             >
                               <div className="flex items-start justify-between mb-2">
@@ -719,7 +719,7 @@ export default function CreateParcelOrder() {
                                 "relative p-4 border-2 rounded-lg cursor-pointer transition-all hover:border-emerald-500",
                                 field.value === "same-day"
                                   ? "border-emerald-500 bg-emerald-50"
-                                  : "border-gray-200"
+                                  : "border-gray-200",
                               )}
                             >
                               <div className="flex items-start justify-between mb-2">
@@ -747,7 +747,7 @@ export default function CreateParcelOrder() {
                                 "relative p-4 border-2 rounded-lg cursor-pointer transition-all hover:border-emerald-500",
                                 field.value === "scheduled"
                                   ? "border-emerald-500 bg-emerald-50"
-                                  : "border-gray-200"
+                                  : "border-gray-200",
                               )}
                             >
                               <div className="flex items-start justify-between mb-2">

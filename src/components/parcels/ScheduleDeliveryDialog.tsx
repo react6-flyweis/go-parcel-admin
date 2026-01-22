@@ -301,7 +301,7 @@ export default function ScheduleDeliveryDialog({
                 <div>
                   <label className="text-sm font-medium">Package Type *</label>
                   <Select value={packageType} onValueChange={setPackageType}>
-                    <SelectTrigger className="mt-1">
+                    <SelectTrigger className="mt-1 w-full">
                       <SelectValue placeholder="Select package type" />
                     </SelectTrigger>
                     <SelectContent>
@@ -394,7 +394,7 @@ export default function ScheduleDeliveryDialog({
                 <div>
                   <label className="text-sm font-medium">Time Slot *</label>
                   <Select value={timeSlot} onValueChange={setTimeSlot}>
-                    <SelectTrigger className="mt-1">
+                    <SelectTrigger className="mt-1 w-full">
                       <SelectValue placeholder="Select time slot" />
                     </SelectTrigger>
                     <SelectContent>
@@ -422,7 +422,7 @@ export default function ScheduleDeliveryDialog({
                 <div>
                   <label className="text-sm font-medium">Recurrence *</label>
                   <Select value={recurrence} onValueChange={setRecurrence}>
-                    <SelectTrigger className="mt-1">
+                    <SelectTrigger className="mt-1 w-full">
                       <SelectValue placeholder="Select recurrence" />
                     </SelectTrigger>
                     <SelectContent>
@@ -455,7 +455,7 @@ export default function ScheduleDeliveryDialog({
                 <div>
                   <label className="text-sm font-medium">Delivery Type *</label>
                   <Select value={deliveryType} onValueChange={setDeliveryType}>
-                    <SelectTrigger className="mt-1">
+                    <SelectTrigger className="mt-1 w-full">
                       <SelectValue placeholder="Select delivery type" />
                     </SelectTrigger>
                     <SelectContent>
