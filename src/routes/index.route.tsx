@@ -11,8 +11,11 @@ const ForgotPassword = lazy(() => import("@/pages/auth/ForgotPassword"));
 const DashboardOverview = lazy(
   () => import("@/pages/overview/DashboardOverview"),
 );
+
 // Reports
 const Reports = lazy(() => import("@/pages/Reports"));
+// Settings
+const Settings = lazy(() => import("@/pages/settings/Settings"));
 
 // send a parcel section
 const AllParcels = lazy(() => import("@/pages/parcels/AllParcels"));
@@ -92,6 +95,10 @@ export const Routes: RouteObject[] = [
       {
         index: true,
         element: <DashboardOverview />,
+      },
+      {
+        path: "settings",
+        element: <Settings />,
       },
       {
         path: "reports",
