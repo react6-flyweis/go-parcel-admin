@@ -3,11 +3,17 @@ import { User, Bell, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import UserMenu from "./UserMenu";
 import HeaderSearch from "./HeaderSearch";
+import { SidebarTrigger } from "../ui/sidebar";
 
 export default function Header() {
   return (
     <header className="w-full bg-white py-4 px-6 shadow-sm">
       <div className="flex items-center justify-between gap-4">
+        {/* show only in mobile */}
+        <div className=" md:hidden">
+          <SidebarTrigger />
+        </div>
+
         <div className="flex-1">
           <HeaderSearch />
         </div>
