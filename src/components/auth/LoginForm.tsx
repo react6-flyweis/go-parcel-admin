@@ -39,7 +39,7 @@ export default function LoginForm() {
   const handleSubmit = (data: LoginFormValues) => {
     console.log("Login data:", data);
     // Handle login logic here
-    navigate("/");
+    navigate("/dashboard");
   };
 
   return (
