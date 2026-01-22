@@ -12,6 +12,7 @@ import {
   Calendar,
   AlertTriangle,
   LayoutDashboardIcon,
+  Settings,
   Users,
   Stethoscope,
   Ambulance,
@@ -313,5 +314,11 @@ export const NAV_ITEMS: NavItem[] = [
     title: "Reports & Analytics",
     icon: ChartColumn,
     href: "/reports",
+  },
+
+  {
+    title: "System Settings",
+    icon: Settings,
+    href: "/settings",
   },
 ];
