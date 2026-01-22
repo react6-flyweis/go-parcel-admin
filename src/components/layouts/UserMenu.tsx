@@ -1,4 +1,5 @@
 import { User, LogOut } from "lucide-react";
+import { Link } from "react-router";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -30,13 +31,20 @@ export default function UserMenu() {
           </div>
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <DropdownMenuItem>
-          <User size={16} className="mr-2" />
-          <span>Profile Settings</span>
+        <DropdownMenuItem asChild>
+          <Link to="/settings" className="flex items-center">
+            <User size={16} className="mr-2" />
+            <span>Profile Settings</span>
+          </Link>
         </DropdownMenuItem>
-        <DropdownMenuItem className="text-red-600 focus:text-red-600">
-          <LogOut size={16} className="mr-2" />
-          <span>Logout</span>
+        <DropdownMenuItem asChild>
+          <Link
+            to="/login"
+            className="flex items-center text-red-600 focus:text-red-600"
+          >
+            <LogOut size={16} className="mr-2" />
+            <span>Logout</span>
+          </Link>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
