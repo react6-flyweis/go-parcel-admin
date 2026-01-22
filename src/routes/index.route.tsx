@@ -81,7 +81,7 @@ const Permissions = lazy(() => import("@/pages/users/Permissions"));
 
 export const Routes: RouteObject[] = [
   {
-    path: "/login",
+    path: "/",
     element: <Login />,
   },
   {
@@ -93,7 +93,8 @@ export const Routes: RouteObject[] = [
     element: <DashboardLayout />,
     children: [
       {
-        index: true,
+        // index: true,
+        path: "dashboard",
         element: <DashboardOverview />,
       },
       {

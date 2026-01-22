@@ -49,7 +49,7 @@ export const NAV_ITEMS: NavItem[] = [
   {
     title: "Dashboard",
     icon: LayoutDashboardIcon,
-    href: "/",
+    href: "/dashboard",
   },
   {
     title: "Send a Parcel",
