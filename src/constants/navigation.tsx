@@ -33,6 +33,7 @@ import {
   ShieldCheck,
   UserCog,
   UserCircle,
+  ChartColumn,
 } from "lucide-react";
 
 export interface NavItem {
@@ -308,7 +309,9 @@ export const NAV_ITEMS: NavItem[] = [
     ],
   },
 
-  // support
-
-  // more nav items...
+  {
+    title: "Reports & Analytics",
+    icon: ChartColumn,
+    href: "/reports",
+  },
 ];
