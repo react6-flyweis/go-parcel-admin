@@ -46,13 +46,16 @@ const ORDERS = [
   },
 ];
 
+const STATUS_COLOR_MAP: Record<string, string> = {
+  Completed: "bg-green-500 text-white",
+  "In Transit": "bg-gray-500 text-white",
+  Pickup: "bg-gray-500 text-white",
+  Assigned: "bg-gray-500 text-white",
+};
+
 function StatusPill({ status }: { status: string }) {
-  const base = "rounded-full px-3 py-1 text-xs font-medium";
-  let color = "bg-gray-200 text-gray-700";
-  if (status === "Completed") color = "bg-emerald-100 text-emerald-700";
-  else if (status === "In Transit") color = "bg-gray-700 text-white";
-  else if (status === "Pickup") color = "bg-gray-700 text-white";
-  else if (status === "Assigned") color = "bg-gray-700 text-white";
+  const base = "rounded-md px-3 py-1 text-xs font-medium";
+  const color = STATUS_COLOR_MAP[status] ?? "bg-gray-200 text-gray-700";
 
   return <span className={`${base} ${color}`}>{status}</span>;
 }
