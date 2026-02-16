@@ -1,34 +1,52 @@
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Calendar, Eye, Edit } from "lucide-react";
+import ViewAppointmentDialog from "@/components/services/ViewAppointmentDialog";
+import EditNotaryAppointmentDialog from "@/components/services/EditNotaryAppointmentDialog";
 
 const defaultAppointments = [
   {
     id: "NOT-2001",
     client: "Sarah Anderson",
+    phone: "(555) 111-2222",
     service: "Real Estate Closing",
+    documents: "Mortgage Documents",
     appointment: "2024-01-15 10:00 AM",
     status: "Scheduled",
     notary: "Jennifer White",
+    location: "789 Main St, Boston, MA",
+    signers: 2,
+    notes: "Bring 2 forms of ID",
     fee: 150.0,
   },
   {
     id: "NOT-2002",
     client: "Michael Brown",
+    phone: "(555) 222-3333",
     service: "Legal Documents",
+    documents: "Power of Attorney",
     appointment: "2024-01-15 02:00 PM",
     status: "In Progress",
     notary: "Robert Martinez",
+    location: "412 Elm St, Springfield, IL",
+    signers: 1,
+    notes: "Client will meet at reception",
     fee: 75.0,
   },
   {
     id: "NOT-2003",
     client: "Lisa Davis",
+    phone: "(555) 444-5555",
     service: "Business Documents",
+    documents: "Incorporation Papers",
     appointment: "2024-01-15 04:30 PM",
     status: "Scheduled",
     notary: "Amanda Lopez",
+    location: "220 Oak Ave, Portland, OR",
+    signers: 3,
+    notes: "Bring company resolution",
     fee: 200.0,
   },
 ];
@@ -47,6 +65,20 @@ const statusColors: Record<string, string> = {
 export default function NotaryAppointmentsTable({
   appointments = defaultAppointments,
 }: Props) {
+  const [list, setList] = useState(appointments);
+
+  function handleUpdate(
+    updated: Partial<(typeof defaultAppointments)[number]> & { id: string },
+  ) {
+    setList((prev) =>
+      prev.map((p) =>
+        p.id === updated.id
+          ? ({ ...p, ...updated } as (typeof defaultAppointments)[number])
+          : p,
+      ),
+    );
+  }
+
   return (
     <Card className="pb-0">
       <CardHeader className="border-b">
@@ -86,7 +118,7 @@ export default function NotaryAppointmentsTable({
                   </tr>
                 </thead>
                 <tbody>
-                  {appointments.map((a) => (
+                  {list.map((a) => (
                     <tr key={a.id} className="border-b hover:bg-muted/50">
                       <td className="px-4 py-3 text-sm">{a.id}</td>
                       <td className="px-4 py-3 text-sm">{a.client}</td>
@@ -112,12 +144,32 @@ export default function NotaryAppointmentsTable({
                       </td>
                       <td className="px-4 py-3 text-sm">
                         <div className="flex items-center gap-2">
-                          <Button variant="ghost" className="p-2">
-                            <Eye className="h-4 w-4" />
-                          </Button>
-                          <Button variant="ghost" className="p-2">
-                            <Edit className="h-4 w-4" />
-                          </Button>
+                          <ViewAppointmentDialog
+                            appointment={a}
+                            editTrigger={
+                              <EditNotaryAppointmentDialog
+                                appointment={a}
+                                onSave={handleUpdate}
+                              >
+                                <Button className="bg-green-500 hover:bg-green-600">
+                                  Edit Appointment
+                                </Button>
+                              </EditNotaryAppointmentDialog>
+                            }
+                          >
+                            <Button variant="ghost" className="p-2">
+                              <Eye className="h-4 w-4" />
+                            </Button>
+                          </ViewAppointmentDialog>
+
+                          <EditNotaryAppointmentDialog
+                            appointment={a}
+                            onSave={handleUpdate}
+                          >
+                            <Button variant="ghost" className="p-2">
+                              <Edit className="h-4 w-4" />
+                            </Button>
+                          </EditNotaryAppointmentDialog>
                         </div>
                       </td>
                     </tr>
