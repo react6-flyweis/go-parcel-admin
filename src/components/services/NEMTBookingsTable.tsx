@@ -4,6 +4,8 @@ import { Badge } from "@/components/ui/badge";
 import { Calendar, Eye, Edit } from "lucide-react";
 import type { ColumnDef } from "@tanstack/react-table";
 import DataTableWithSearch from "../DataTableWithSearch";
+import EditNemtBookingDialog from "./EditNemtBookingDialog";
+import ViewNemtBookingDialog from "./ViewNemtBookingDialog";
 
 const defaultBookings = [
   {
@@ -99,16 +101,16 @@ const columns: ColumnDef<Booking>[] = [
     header: "Actions",
     cell: ({ row }) => (
       <div className="flex items-center gap-2">
-        <Button
-          variant="ghost"
-          className="p-2"
-          onClick={() => console.log(row.original.id)}
-        >
-          <Eye className="h-4 w-4" />
-        </Button>
-        <Button variant="ghost" className="p-2">
-          <Edit className="h-4 w-4" />
-        </Button>
+        <ViewNemtBookingDialog booking={row.original}>
+          <Button variant="ghost" className="p-2">
+            <Eye className="h-4 w-4" />
+          </Button>
+        </ViewNemtBookingDialog>
+        <EditNemtBookingDialog booking={row.original}>
+          <Button variant="ghost" className="p-2">
+            <Edit className="h-4 w-4" />
+          </Button>
+        </EditNemtBookingDialog>
       </div>
     ),
   },
