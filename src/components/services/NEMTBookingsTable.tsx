@@ -99,20 +99,56 @@ const columns: ColumnDef<Booking>[] = [
   {
     id: "actions",
     header: "Actions",
-    cell: ({ row }) => (
-      <div className="flex items-center gap-2">
-        <ViewNemtBookingDialog booking={row.original}>
-          <Button variant="ghost" className="p-2">
-            <Eye className="h-4 w-4" />
-          </Button>
-        </ViewNemtBookingDialog>
-        <EditNemtBookingDialog booking={row.original}>
-          <Button variant="ghost" className="p-2">
-            <Edit className="h-4 w-4" />
-          </Button>
-        </EditNemtBookingDialog>
-      </div>
-    ),
+    cell: ({ row }) => {
+      const appt = String(row.original.appointment ?? "");
+      const match = appt.match(
+        /^(\d{4}-\d{2}-\d{2})\s+(\d{1,2}:\d{2})\s*(AM|PM)?/i,
+      );
+      const appointmentDate = match ? match[1] : "";
+      let appointmentTime = "";
+      if (match) {
+        const hhmm = match[2];
+        const ampm = match[3];
+        if (ampm) {
+          let [h, m] = hhmm.split(":").map(Number);
+          if (/^pm$/i.test(ampm) && h !== 12) h += 12;
+          if (/^am$/i.test(ampm) && h === 12) h = 0;
+          appointmentTime = `${String(h).padStart(2, "0")}:${String(m).padStart(2, "0")}`;
+        } else {
+          appointmentTime = hhmm;
+        }
+      }
+
+      const editBooking = {
+        patientName: row.original.patient,
+        patientPhone: "",
+        pickupAddress: "",
+        dropoffAddress: "",
+        appointmentDate,
+        appointmentTime,
+        vehicleType: row.original.vehicle,
+        insuranceProvider: "",
+        specialRequirements: "",
+        wheelchairAccessible: false,
+        oxygenRequired: false,
+      };
+
+      return (
+        <div className="flex items-center gap-2">
+          <ViewNemtBookingDialog booking={row.original}>
+            <Button variant="ghost" className="p-2">
+              <Eye className="h-4 w-4" />
+            </Button>
+          </ViewNemtBookingDialog>
+
+          <EditNemtBookingDialog booking={editBooking}>
+            <Button variant="ghost" className="p-2">
+              <Edit className="h-4 w-4" />
+            </Button>
+          </EditNemtBookingDialog>
+        </div>
+      );
+    },
   },
 ];
 
