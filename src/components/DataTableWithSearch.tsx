@@ -42,7 +42,7 @@ export default function DataTableWithSearch<TData, TValue>({
 
       <Card className="pb-0">
         <CardHeader className="border-b">
-          <CardTitle className="text-xl">{title}</CardTitle>
+          <CardTitle className="text-lg md:text-xl">{title}</CardTitle>
         </CardHeader>
         <CardContent className="p-0">
           <DataTable

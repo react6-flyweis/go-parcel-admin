@@ -14,7 +14,7 @@ export function MetricCard({
   iconColor,
 }: MetricCardProps) {
   return (
-    <div className="rounded-xl border bg-white p-6 shadow-sm">
+    <div className="rounded-xl border bg-white p-4 md:p-6 shadow-sm">
       <div className="flex items-center justify-between">
         <div>
           <p className="text-sm text-gray-600">{label}</p>

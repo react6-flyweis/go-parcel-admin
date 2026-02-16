@@ -90,8 +90,8 @@ const DataTableInner = forwardRef(function DataTableInner<TData, TValue>(
 
   return (
     <div className="overflow-x-auto rounded-md border">
-      <div className=" overflow-y-auto [&_td]:py-4">
-        <Table className="min-w-full">
+      <div className="overflow-y-auto [&_td]:py-2 sm:[&_td]:py-4">
+        <Table className="min-w-full text-sm sm:text-base">
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>

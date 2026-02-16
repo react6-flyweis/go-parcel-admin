@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Search, Filter, Download, CarIcon } from "lucide-react";
 import CreateParcelDialog from "@/components/parcels/CreateParcelDialog";
+import PageHeader from "@/components/PageHeader";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
@@ -13,6 +14,8 @@ import {
 } from "@/components/ui/select";
 import { Card, CardContent } from "@/components/ui/card";
 import StatCard from "@/components/ui/stat-card";
+import DataTable from "@/components/DataTable";
+import type { ColumnDef } from "@tanstack/react-table";
 
 // Sample data
 const parcelsData = [
@@ -89,28 +92,61 @@ export default function AllParcels() {
   const [typeFilter, setTypeFilter] = useState("all");
   const [dateRange, setDateRange] = useState("all");
 
+  const columns: ColumnDef<(typeof parcelsData)[0]>[] = [
+    {
+      accessorKey: "id",
+      header: "Tracking ID",
+    },
+    {
+      accessorKey: "sender",
+      header: "Sender",
+    },
+    {
+      accessorKey: "recipient",
+      header: "Recipient",
+    },
+    {
+      accessorKey: "status",
+      header: "Status",
+      cell: ({ getValue }) => (
+        <Badge
+          className={getStatusColor(String(getValue()))}
+          variant={getStatusVariant(String(getValue()))}
+        >
+          {String(getValue())}
+        </Badge>
+      ),
+    },
+    {
+      accessorKey: "parcelType",
+      header: "Parcel Type",
+    },
+    {
+      accessorKey: "destination",
+      header: "Destination",
+    },
+    {
+      accessorKey: "deliveryFee",
+      header: "Delivery Fee",
+    },
+  ];
+
   return (
     <div className="flex flex-col gap-6">
-      {/* Header */}
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-2xl tracking-tight">All Parcels</h1>
-          <p className="text-muted-foreground">
-            Complete overview of all parcel deliveries
-          </p>
-        </div>
-        {/* Create Parcel Order dialog */}
-
+      <PageHeader
+        title="All Parcels"
+        subtitle="Complete overview of all parcel deliveries"
+      >
         <CreateParcelDialog>
           <Button>
             <CarIcon />
             Create Parcel Order
           </Button>
         </CreateParcelDialog>
-      </div>
+      </PageHeader>
 
       {/* Stat Cards */}
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+      <div className="grid gap-4 grid-cols-2 lg:grid-cols-4">
         {statCards.map((stat) => (
           <StatCard
             key={stat.title}
@@ -124,9 +160,9 @@ export default function AllParcels() {
       {/* Filters and Search */}
       <Card>
         <CardContent className="flex flex-col gap-5">
-          <div className="flex gap-5">
+          <div className="flex flex-col sm:flex-row sm:items-center gap-5">
             {/* Search Bar */}
-            <div className="relative flex-1">
+            <div className="relative flex-1 min-w-0">
               <Search className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
               <Input
                 placeholder="Search by ID, name, phone..."
@@ -136,7 +172,7 @@ export default function AllParcels() {
               />
             </div>
             <Select value={statusFilter} onValueChange={setStatusFilter}>
-              <SelectTrigger className="flex-1 border-0 shadow-none">
+              <SelectTrigger className="w-full sm:flex-1 border-0 shadow-none min-w-0">
                 <SelectValue placeholder="Status" />
               </SelectTrigger>
               <SelectContent>
@@ -149,7 +185,7 @@ export default function AllParcels() {
             </Select>
 
             <Select value={typeFilter} onValueChange={setTypeFilter}>
-              <SelectTrigger className="flex-1 border-0 shadow-none">
+              <SelectTrigger className="w-full sm:flex-1 border-0 shadow-none min-w-0">
                 <SelectValue placeholder="All Types" />
               </SelectTrigger>
               <SelectContent>
@@ -162,7 +198,7 @@ export default function AllParcels() {
             </Select>
 
             <Select value={dateRange} onValueChange={setDateRange}>
-              <SelectTrigger className="flex-1 border-0 shadow-none">
+              <SelectTrigger className="w-full sm:flex-1 border-0 shadow-none min-w-0">
                 <SelectValue placeholder="Date Range" />
               </SelectTrigger>
               <SelectContent>
@@ -176,16 +212,18 @@ export default function AllParcels() {
           </div>
 
           {/* Filter Row */}
-          <div className="flex flex-wrap items-center gap-3">
-            <Button variant="outline" className="bg-gray-100">
-              <Filter className="" />
-              More Filters
-            </Button>
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3">
+            <div className="flex gap-3 w-full sm:w-auto">
+              <Button variant="outline" className="bg-gray-100">
+                <Filter className="" />
+                More Filters
+              </Button>
 
-            <Button className=" bg-green-500 hover:bg-green-600">
-              <Download className="mr-2 h-4 w-4" />
-              Export
-            </Button>
+              <Button className=" bg-green-500 hover:bg-green-600">
+                <Download className="mr-2 h-4 w-4" />
+                Export
+              </Button>
+            </div>
           </div>
         </CardContent>
       </Card>
@@ -193,54 +231,8 @@ export default function AllParcels() {
       {/* Data Table */}
       <Card className="p-0">
         <CardContent className="p-0">
-          <div className="overflow-x-auto">
-            <table className="w-full">
-              <thead>
-                <tr className="border-b bg-secondary text-white">
-                  <th className="px-4 py-3 text-left text-sm font-medium rounded-tl-lg">
-                    Tracking ID
-                  </th>
-                  <th className="px-4 py-3 text-left text-sm font-medium">
-                    Sender
-                  </th>
-                  <th className="px-4 py-3 text-left text-sm font-medium">
-                    Recipient
-                  </th>
-                  <th className="px-4 py-3 text-left text-sm font-medium">
-                    Status
-                  </th>
-                  <th className="px-4 py-3 text-left text-sm font-medium">
-                    Parcel Type
-                  </th>
-                  <th className="px-4 py-3 text-left text-sm font-medium">
-                    Destination
-                  </th>
-                  <th className="px-4 py-3 text-left text-sm font-medium rounded-tr-lg">
-                    Delivery Fee
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {parcelsData.map((parcel) => (
-                  <tr key={parcel.id} className="border-b hover:bg-muted/50">
-                    <td className="px-4 py-3 text-sm">{parcel.id}</td>
-                    <td className="px-4 py-3 text-sm">{parcel.sender}</td>
-                    <td className="px-4 py-3 text-sm">{parcel.recipient}</td>
-                    <td className="px-4 py-3 text-sm">
-                      <Badge
-                        className={getStatusColor(parcel.status)}
-                        variant={getStatusVariant(parcel.status)}
-                      >
-                        {parcel.status}
-                      </Badge>
-                    </td>
-                    <td className="px-4 py-3 text-sm">{parcel.parcelType}</td>
-                    <td className="px-4 py-3 text-sm">{parcel.destination}</td>
-                    <td className="px-4 py-3 text-sm">{parcel.deliveryFee}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+          <div className="">
+            <DataTable columns={columns} data={parcelsData} />
           </div>
         </CardContent>
       </Card>

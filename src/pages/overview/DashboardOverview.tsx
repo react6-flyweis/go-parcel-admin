@@ -15,6 +15,7 @@ import {
   RefreshCw,
   FileDown,
 } from "lucide-react";
+import PageHeader from "@/components/PageHeader";
 import { RevenueOrdersChart } from "@/components/overview/RevenueOrdersChart";
 import { HourlyActiveOrdersChart } from "@/components/overview/HourlyActiveOrdersChart";
 import { RevenueByServiceChart } from "@/components/overview/RevenueByServiceChart";
@@ -30,17 +31,12 @@ import { CustomerInsights } from "@/components/overview/CustomerInsights";
 
 export default function DashboardOverview() {
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 min-h-0">
       {/* Header */}
-      <div className="flex items-start justify-between">
-        <div>
-          <h1 className="text-3xl font-bold text-gray-900">
-            Dashboard Overview
-          </h1>
-          <p className="mt-1 text-sm text-gray-600">
-            Real-time insights and performance metrics
-          </p>
-        </div>
+      <PageHeader
+        title="Dashboard Overview"
+        subtitle="Real-time insights and performance metrics"
+      >
         <div className="flex items-center gap-2">
           <Button variant="outline" size="sm" className="gap-2">
             <Calendar className="h-4 w-4" />
@@ -58,10 +54,10 @@ export default function DashboardOverview() {
             Export Report
           </Button>
         </div>
-      </div>
+      </PageHeader>
 
       {/* Main Stat Cards */}
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4 min-h-0">
         <StatCard
           title="Total Revenue"
           value="$119,800"
@@ -93,7 +89,7 @@ export default function DashboardOverview() {
       </div>
 
       {/* Secondary Metrics */}
-      <div className="grid gap-4 md:grid-cols-3 lg:grid-cols-5">
+      <div className="grid gap-4 grid-cols-2 lg:grid-cols-5 min-h-0">
         <MetricCard
           label="Live Orders"
           value="211"
@@ -127,46 +123,57 @@ export default function DashboardOverview() {
       </div>
 
       {/* Charts */}
-      <div className="grid gap-4 md:grid-cols-2">
-        <RevenueOrdersChart />
-        <HourlyActiveOrdersChart />
+      <div className="grid gap-4 md:grid-cols-2 min-h-0">
+        <div className="min-h-0 overflow-hidden">
+          <RevenueOrdersChart />
+        </div>
+        <div className="min-h-0 overflow-hidden">
+          <HourlyActiveOrdersChart />
+        </div>
       </div>
 
       {/* Additional Insights */}
-      <div className="grid gap-4 md:grid-cols-3">
-        <div className="">
+      <div className="grid gap-4 md:grid-cols-3 min-h-0">
+        <div className="min-h-0 overflow-hidden">
           <RevenueByServiceChart />
         </div>
-        <div className="md:col-span-2">
+
+        <div className="md:col-span-2 min-h-0 overflow-hidden">
           <RegionalPerformance />
         </div>
       </div>
 
       {/* Live Map + Top Drivers */}
-      <div className="grid gap-4 md:grid-cols-3">
-        <div className="md:col-span-2">
+      <div className="grid gap-4 md:grid-cols-3 min-h-0">
+        <div className="md:col-span-2 min-h-0 overflow-hidden">
           <LiveMap />
         </div>
-        <div>
+        <div className="min-h-0 overflow-hidden">
           <TopDrivers />
         </div>
       </div>
 
       {/* Recent Activity + Recent Orders */}
-      <div className="grid gap-4 md:grid-cols-3">
-        <div className="md:col-span-1">
+      <div className="grid gap-4 grid-cols-1 md:grid-cols-3 min-h-0">
+        <div className="md:col-span-1 min-h-0 overflow-hidden">
           <RecentActivity />
         </div>
-        <div className="md:col-span-2">
+        <div className="md:col-span-2 min-h-0 overflow-hidden">
           <RecentOrders />
         </div>
       </div>
 
       {/* Summary Cards */}
-      <div className="grid gap-4 md:grid-cols-3">
-        <ServiceBreakdown />
-        <WeeklySummary />
-        <CustomerInsights />
+      <div className="grid gap-4 md:grid-cols-3 min-h-0">
+        <div className="min-h-0 overflow-hidden">
+          <ServiceBreakdown />
+        </div>
+        <div className="min-h-0 overflow-hidden">
+          <WeeklySummary />
+        </div>
+        <div className="min-h-0 overflow-hidden">
+          <CustomerInsights />
+        </div>
       </div>
 
       {/* Alerts / Action Cards */}

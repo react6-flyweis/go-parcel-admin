@@ -68,6 +68,15 @@ function TypePill({ type }: { type: string }) {
   );
 }
 
+import {
+  Table,
+  TableHeader,
+  TableBody,
+  TableRow,
+  TableHead,
+  TableCell,
+} from "@/components/ui/table";
+
 export function RecentOrders() {
   return (
     <div className="">
@@ -78,48 +87,40 @@ export function RecentOrders() {
         </a>
       </div>
 
-      <div className="mt-4 overflow-auto">
-        <table className="w-full table-auto border-collapse border rounded-md">
-          <thead>
-            <tr className="bg-[#155fa7]">
-              <th className="py-3 px-4 text-left text-sm text-white rounded-tl-md">
-                Order ID
-              </th>
-              <th className="py-3 px-4 text-left text-sm text-white">Type</th>
-              <th className="py-3 px-4 text-left text-sm text-white">
-                Customer
-              </th>
-              <th className="py-3 px-4 text-left text-sm text-white">Driver</th>
-              <th className="py-3 px-4 text-left text-sm text-white">Status</th>
-              <th className="py-3 px-4 text-left text-sm text-white">Value</th>
-              <th className="py-3 px-4 text-left text-sm text-white rounded-tr-md">
-                Time
-              </th>
-            </tr>
-          </thead>
-          <tbody className="text-sm">
+      <div className="mt-4">
+        <Table>
+          <TableHeader className="bg-[#155fa7]">
+            <TableRow>
+              <TableHead>Order ID</TableHead>
+              <TableHead>Type</TableHead>
+              <TableHead>Customer</TableHead>
+              <TableHead>Driver</TableHead>
+              <TableHead>Status</TableHead>
+              <TableHead>Value</TableHead>
+              <TableHead>Time</TableHead>
+            </TableRow>
+          </TableHeader>
+
+          <TableBody className="text-sm">
             {ORDERS.map((o) => (
-              <tr
-                key={o.id}
-                className="align-top border-t border-gray-100 bg-white"
-              >
-                <td className="py-3 px-4 text-gray-800">{o.id}</td>
-                <td className="py-3 px-4">
+              <TableRow key={o.id} className="align-top bg-white">
+                <TableCell className="text-gray-800">{o.id}</TableCell>
+                <TableCell>
                   <TypePill type={o.type} />
-                </td>
-                <td className="py-3 px-4 text-gray-600">{o.customer}</td>
-                <td className="py-3 px-4 text-gray-600">{o.driver}</td>
-                <td className="py-3 px-4">
+                </TableCell>
+                <TableCell className="text-gray-600">{o.customer}</TableCell>
+                <TableCell className="text-gray-600">{o.driver}</TableCell>
+                <TableCell>
                   <StatusPill status={o.status} />
-                </td>
-                <td className="py-3 px-4 text-emerald-600 font-semibold">
+                </TableCell>
+                <TableCell className="text-emerald-600 font-semibold">
                   {o.value}
-                </td>
-                <td className="py-3 px-4 text-gray-500">{o.time}</td>
-              </tr>
+                </TableCell>
+                <TableCell className="text-gray-500">{o.time}</TableCell>
+              </TableRow>
             ))}
-          </tbody>
-        </table>
+          </TableBody>
+        </Table>
       </div>
     </div>
   );
