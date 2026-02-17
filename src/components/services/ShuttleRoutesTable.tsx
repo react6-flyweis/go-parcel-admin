@@ -2,6 +2,8 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Calendar, Eye, Edit, Users } from "lucide-react";
+import ViewShuttleRouteDialog from "@/components/services/ViewShuttleRouteDialog";
+import EditShuttleRouteDialog from "@/components/services/EditShuttleRouteDialog";
 
 const defaultRoutes = [
   {
@@ -108,12 +110,17 @@ export default function ShuttleRoutesTable({ routes = defaultRoutes }: Props) {
                   </td>
                   <td className="px-4 py-3 text-sm">
                     <div className="flex items-center gap-2">
-                      <Button variant="ghost" className="p-2">
-                        <Eye className="h-4 w-4" />
-                      </Button>
-                      <Button variant="ghost" className="p-2">
-                        <Edit className="h-4 w-4" />
-                      </Button>
+                      <ViewShuttleRouteDialog route={r}>
+                        <Button variant="ghost" className="p-2">
+                          <Eye className="h-4 w-4" />
+                        </Button>
+                      </ViewShuttleRouteDialog>
+
+                      <EditShuttleRouteDialog route={r}>
+                        <Button variant="ghost" className="p-2">
+                          <Edit className="h-4 w-4" />
+                        </Button>
+                      </EditShuttleRouteDialog>
                     </div>
                   </td>
                 </tr>
