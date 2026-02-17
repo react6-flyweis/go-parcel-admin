@@ -2,6 +2,8 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Calendar, Eye, Edit } from "lucide-react";
+import ViewMovingJobDialog from "./ViewMovingJobDialog";
+import EditMovingJobDialog from "./EditMovingJobDialog";
 
 const defaultJobs = [
   {
@@ -110,12 +112,17 @@ export default function MovingJobsTable({ jobs = defaultJobs }: Props) {
                       </td>
                       <td className="px-4 py-3 text-sm">
                         <div className="flex items-center gap-2">
-                          <Button variant="ghost" className="p-2">
-                            <Eye className="h-4 w-4" />
-                          </Button>
-                          <Button variant="ghost" className="p-2">
-                            <Edit className="h-4 w-4" />
-                          </Button>
+                          <ViewMovingJobDialog job={j}>
+                            <Button variant="ghost" className="p-2">
+                              <Eye className="h-4 w-4" />
+                            </Button>
+                          </ViewMovingJobDialog>
+
+                          <EditMovingJobDialog job={j}>
+                            <Button variant="ghost" className="p-2">
+                              <Edit className="h-4 w-4" />
+                            </Button>
+                          </EditMovingJobDialog>
                         </div>
                       </td>
                     </tr>
